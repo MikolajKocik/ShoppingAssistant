@@ -1,7 +1,8 @@
 ﻿using Microsoft.SemanticKernel;
 using ShoppingAssistant.Configurations.POCO;
 using ShoppingAssistant.Plugins;
-using ShoppingAssistant.Services;
+using ShoppingAssistant.Services.Kernel;
+using ShoppingAssistant.Services.Shopping;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +53,8 @@ builder.Services.AddTransient(sp =>
     return new Kernel(sp, plugins);
 });
 
+builder.Services.AddSingleton<PromptLoader>();
+
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
@@ -69,4 +72,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();

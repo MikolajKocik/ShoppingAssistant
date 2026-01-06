@@ -1,0 +1,14 @@
+<Project>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- Disable NuGet packaging by default. Projects can override. -->
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+</Project>

@@ -1,4 +1,5 @@
-﻿using ShoppingAssistant.Models.Enumerators;
+﻿using Microsoft.Extensions.VectorData;
+using ShoppingAssistant.Models.Enumerators;
 
 namespace ShoppingAssistant.Models;
 
@@ -34,7 +35,7 @@ public sealed class Product
             ? throw new ArgumentException("Brand cannot be null or empty.", nameof(brand))
             : brand;
 
-        this.Category = category;
+        this.Category = category.ToString();
 
         this.Price = price >= 0
             ? price
@@ -48,38 +49,52 @@ public sealed class Product
     }
 
     /// <summary>
+    /// Gets the combined string representation of the name, brand, category, and description for use as an embedding
+    /// source.
+    /// </summary>
+    [VectorStoreVector(1536)]
+    public string Embedding => $"{Name} {Brand} {Category} {Description}";
+
+    /// <summary>
     /// Gets or sets the unique identifier for the entity.
     /// </summary>
+    [VectorStoreKey]
     public string Id { get; private set; }
 
     /// <summary>
     /// Gets or sets the name associated with the object.
     /// </summary>
+    [VectorStoreData(IsIndexed = true)]
     public string Name { get; private set; }
 
     /// <summary>
     /// Gets or sets the brand name associated with the item.
     /// </summary>
+    [VectorStoreData(IsIndexed = true)]
     public string Brand { get; private set; }
 
     /// <summary>
     /// Gets or sets the category associated with the item.
     /// </summary>
-    public Category Category { get; private set; }
+    [VectorStoreData(IsIndexed = true)]
+    public string Category { get; private set; }
 
     /// <summary>
     /// Gets or sets the price associated with the item.
     /// </summary>
+    [VectorStoreData(IsIndexed = true)]
     public decimal Price { get; private set; }
 
 
     /// <summary>
     /// Gets or sets the rating value associated with the item.
     /// </summary>
+    [VectorStoreData(IsIndexed = true)]
     public double Rating { get; private set; }
 
     /// <summary>
     /// Gets or sets the descriptive text associated with the object.
     /// </summary>
+    [VectorStoreData(IsFullTextIndexed = true)]
     public string Description { get; private set; }
 }

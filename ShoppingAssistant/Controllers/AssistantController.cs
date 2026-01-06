@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
-using ShoppingAssistant.Requests;
+using ShoppingAssistant.Data.Requests;
 using ShoppingAssistant.Services.Kernel;
 
 namespace ShoppingAssistant.Controllers;

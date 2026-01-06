@@ -1,57 +1,17 @@
-﻿using Microsoft.SemanticKernel;
-using ShoppingAssistant.Configurations.POCO;
-using ShoppingAssistant.Plugins;
-using ShoppingAssistant.Services.Kernel;
-using ShoppingAssistant.Services.Shopping;
+﻿using ShoppingAssistant.Services.Kernel;
+using ShoppingAssistant.BuilderExtensionMembers.VectorPg;
+using ShoppingAssistant.BuilderExtensionMembers.AzureOpenAI;
+using ShoppingAssistant.BuilderExtensionMembers.KernelKit;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<AzureOpenAISettings>(
-    builder.Configuration.GetSection("AzureOpenAISettings"));
+builder.RegisterAzureOpenAIServices();
 
-IConfigurationSection azureOpenAISettings = builder.Configuration.GetSection("AzureOpenAISettings");
+builder.DefinePlugins();
+builder.RegisterServices();
 
-builder.Services.AddAzureOpenAIChatCompletion(
-    deploymentName: azureOpenAISettings["Model"]!,
-    endpoint: azureOpenAISettings["Endpoint"]!,
-    apiKey: azureOpenAISettings["ApiKey"]!
-);
-
-// Register services
-builder.Services.AddSingleton<ProductCatalogService>();
-builder.Services.AddSingleton<CartService>();
-builder.Services.AddSingleton<RecommendationService>();
-builder.Services.AddSingleton<UserService>();
-builder.Services.AddSingleton<PriceTrackerService>();
-builder.Services.AddSingleton<PaymentService>();
-
-// Register plugins
-builder.Services.AddSingleton<ProductSearchPlugin>();
-builder.Services.AddSingleton<CartPlugin>();
-builder.Services.AddSingleton<RecommendationPlugin>();
-builder.Services.AddSingleton<UserProfilePlugin>();
-builder.Services.AddSingleton<PriceTrackerPlugin>();
-builder.Services.AddSingleton<PaymentPlugin>();
-
-// Create plugin collection
-builder.Services.AddSingleton<KernelPluginCollection>(sp =>
-{
-    return
-    [
-        KernelPluginFactory.CreateFromObject(sp.GetRequiredService<ProductSearchPlugin>()),
-        KernelPluginFactory.CreateFromObject(sp.GetRequiredService<CartPlugin>()),
-        KernelPluginFactory.CreateFromObject(sp.GetRequiredService<RecommendationPlugin>()),
-        KernelPluginFactory.CreateFromObject(sp.GetRequiredService<UserProfilePlugin>()),
-        KernelPluginFactory.CreateFromObject(sp.GetRequiredService<PriceTrackerPlugin>()),
-        KernelPluginFactory.CreateFromObject(sp.GetRequiredService<PaymentPlugin>())
-    ];
-});
-
-builder.Services.AddTransient(sp =>
-{
-    var plugins = sp.GetRequiredService<KernelPluginCollection>();
-    return new Kernel(sp, plugins);
-});
+builder.AddPostgresVectorStorage();
+builder.DefineVectorStoreSchema();
 
 builder.Services.AddSingleton<PromptLoader>();
 

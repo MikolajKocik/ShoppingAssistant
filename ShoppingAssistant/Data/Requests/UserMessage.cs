@@ -1,4 +1,4 @@
-﻿namespace ShoppingAssistant.Requests;
+﻿namespace ShoppingAssistant.Data.Requests;
 
 /// <summary>
 /// Gets or sets the text content of the user message.

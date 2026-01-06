@@ -5,8 +5,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+		<PackageReference Include="Microsoft.Extensions.VectorData.Abstractions" />
+		<PackageReference Include="Microsoft.KernelMemory.MemoryDb.Postgres" />
 		<PackageReference Include="Microsoft.SemanticKernel" />
 		<PackageReference Include="Microsoft.SemanticKernel.Connectors.AzureOpenAI" />
+		<PackageReference Include="Microsoft.SemanticKernel.Connectors.PgVector" />
 		<PackageReference Include="Microsoft.SemanticKernel.PromptTemplates.Handlebars" />
 		<PackageReference Include="YamlDotNet" />
 	</ItemGroup>

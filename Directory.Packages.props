@@ -5,9 +5,14 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.VectorData" Version="9.7.0" />
+    <PackageVersion Include="Microsoft.Extensions.VectorData.Abstractions" Version="9.7.0" />
     <PackageVersion Include="Microsoft.SemanticKernel" Version="1.68.0" />
     <PackageVersion Include="Microsoft.SemanticKernel.Connectors.AzureOpenAI" Version="1.68.0" />
+    <PackageVersion Include="Microsoft.SemanticKernel.Connectors.PgVector" Version="1.68.0-preview" />
+    <PackageVersion Include="Microsoft.KernelMemory.MemoryDb.Postgres" Version="0.98.250508.3" />
     <PackageVersion Include="Microsoft.SemanticKernel.PromptTemplates.Handlebars" Version="1.68.0" />
     <PackageVersion Include="YamlDotNet" Version="16.3.0" />
+
   </ItemGroup>
 </Project>

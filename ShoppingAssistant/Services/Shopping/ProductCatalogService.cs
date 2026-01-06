@@ -1,4 +1,6 @@
-﻿namespace ShoppingAssistant.Services.Shopping;
+﻿using ShoppingAssistant.Data.Responses;
+
+namespace ShoppingAssistant.Services.Shopping;
 
 /// <summary>
 /// Provides methods for retrieving, filtering, searching, and sorting products in the product catalog.
@@ -9,26 +11,23 @@
 /// multiple requests.</remarks>
 public sealed class ProductCatalogService
 {
-
-   
-    public async Task<IEnumerable<ProductResponse>> FilterProductsAsync()
+    public Task<IEnumerable<ProductResponse>> FilterProductsAsync()
     {
-        return 
+        return Task.FromResult<IEnumerable<ProductResponse>>([]);
     }
 
-
-    public async Task<IEnumerable<ProductResponse>> SearchProductsAsync()
+    public Task<IEnumerable<ProductResponse>> SearchProductsAsync()
     {
-        return
+        return Task.FromResult<IEnumerable<ProductResponse>>([]);
     }
 
     public Task<IEnumerable<ProductResponse>> SortProductsAsync()
     {
-        return
+        return Task.FromResult<IEnumerable<ProductResponse>>([]);
     }
 
-    public async Task<ProductResponse> GetByIdAsync(string id)
+    public Task<ProductResponse> GetByIdAsync(string id)
     {
-        return
+        return Task.FromResult<ProductResponse>(null!);
     }
 }

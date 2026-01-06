@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using Microsoft.SemanticKernel;
+using ShoppingAssistant.Data.Responses;
+using ShoppingAssistant.Models.Enumerators;
 
 namespace ShoppingAssistant.Plugins;
 
@@ -31,7 +33,7 @@ public sealed class ProductSearchPlugin
         [Description("Additional unique keywords to search products")] params string[] keywords
         )
     {
-
+        return [];
     }
 
     /// <summary>
@@ -47,13 +49,13 @@ public sealed class ProductSearchPlugin
     [KernelFunction("filter_products")]
     [Description("Filter products based on minimal price, max price, brand and category")]
     public async Task<IEnumerable<ProductResponse>> FilterProductsAsync(
-        decimal minPrice,
-        decimal maxPrice,
-        string brand,
-        Category category
+        [Description("Product minimal price")] decimal minPrice,
+        [Description("Product maksimum price")] decimal maxPrice,
+        [Description("Product brand")] string brand,
+        [Description("Product category")] Category category
         )
     {
-
+        return [];
     }
 
     /// <summary>
@@ -72,12 +74,12 @@ public sealed class ProductSearchPlugin
     [KernelFunction("sort_products")]
     [Description("Sort products based on price increase, price decrease, popularity and rating")]
     public async Task<IEnumerable<ProductResponse>> SortProductsAsync(
-        decimal priceIncrease,
-        decimal priceDecrease,
-        int popularity,
-        double rating)
+        [Description("Product sorted by price increase")] decimal priceIncrease,
+        [Description("Product sorted by price decrease")] decimal priceDecrease,
+        [Description("Product popularity")] int popularity,
+        [Description("Rating for product")] double rating)
     {
-
+        return [];
     }
 
     /// <summary>
@@ -88,6 +90,6 @@ public sealed class ProductSearchPlugin
     [Description("Get detailed information about a specific product by its unique identifier")]
     public async Task<ProductResponse> GetProductDetailsAsync()
     {
-
+        return null!;
     }
 }
